@@ -428,6 +428,18 @@ footer.py-4 .footer-bottom-inner{max-width:1180px!important;display:block!import
 .kicker-dot{width:8px;height:8px;border-radius:50%;background:#a8ffff;box-shadow:0 0 0 5px rgba(168,255,255,.13)}.kicker-divider{opacity:.55}
 .vic-hero-copy h1{font-size:clamp(3.2rem,5.7vw,5.5rem);font-weight:850;letter-spacing:-.075em;line-height:.99;margin:0 0 1.5rem;color:#fff}
 .vic-hero-copy h1 span{color:#a8ffff}
+/* Animated hero headline (hover) */
+.vic-hero-copy h1.hero-anim-title{cursor:default}
+.vic-hero-copy h1.hero-anim-title .hw{display:inline-block;position:relative;color:inherit;transition:transform .5s cubic-bezier(.34,1.56,.64,1),text-shadow .3s ease;transition-delay:calc(var(--i) * 50ms)}
+.vic-hero-copy h1.hero-anim-title .hw-accent{color:#a8ffff}
+.vic-hero-copy h1.hero-anim-title:hover .hw{transform:translateY(-.07em);text-shadow:0 .08em .5em rgba(10,6,70,.28)}
+.vic-hero-copy h1.hero-anim-title .hw:not(.hw-accent):hover{transform:translateY(-.14em) scale(1.08);color:#a8ffff;text-shadow:0 0 .35em rgba(168,255,255,.55),0 .08em .5em rgba(10,6,70,.28);transition-delay:0ms;transition:transform .4s cubic-bezier(.34,1.56,.64,1),color .25s ease,text-shadow .25s ease}
+.vic-hero-copy h1.hero-anim-title .hw-accent:hover{transform:translateY(-.14em) scale(1.08);transition-delay:0ms}
+.vic-hero-copy h1.hero-anim-title .hw-accent:after{content:"";position:absolute;left:0;right:.06em;bottom:.02em;height:.07em;border-radius:99px;background:linear-gradient(90deg,#a8ffff,#fff,#a8ffff);transform:scaleX(0);transform-origin:left center;transition:transform .6s cubic-bezier(.2,.8,.2,1) .25s}
+.vic-hero-copy h1.hero-anim-title:hover .hw-accent:after{transform:scaleX(1)}
+.vic-hero-copy h1.hero-anim-title:hover .hw-accent{background:linear-gradient(100deg,#a8ffff 20%,#fff 45%,#a8ffff 70%) 0 0/220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:heroShimmer 1.8s linear infinite}
+@keyframes heroShimmer{to{background-position:-220% 0}}
+@media(prefers-reduced-motion:reduce){.vic-hero-copy h1.hero-anim-title .hw,.vic-hero-copy h1.hero-anim-title .hw-accent:after{transition:none!important}.vic-hero-copy h1.hero-anim-title:hover .hw,.vic-hero-copy h1.hero-anim-title .hw:hover,.vic-hero-copy h1.hero-anim-title .hw-accent:hover{transform:none}.vic-hero-copy h1.hero-anim-title:hover .hw-accent{animation:none;background:none;-webkit-text-fill-color:currentColor}}
 .vic-hero-description{font-size:clamp(1rem,1.3vw,1.16rem);line-height:1.75;color:rgba(255,255,255,.82);max-width:530px;margin-bottom:1.8rem}
 .vic-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem}.vic-btn{min-height:52px;padding:.9rem 1.25rem;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:1rem;font-weight:800;font-size:.9rem;transition:transform .2s,background .2s,box-shadow .2s}
 .vic-btn:hover{transform:translateY(-3px)}.vic-btn-primary{background:#a8ffff;color:#251f70;box-shadow:0 12px 30px rgba(10,10,50,.16)}.vic-btn-primary:hover{background:#fff;color:#251f70;box-shadow:0 16px 35px rgba(10,10,50,.22)}
@@ -632,7 +644,7 @@ main,section,.app-view,.subpage-main,.content-section{min-width:0}
   <div class="container vic-hero-inner">
     <div class="vic-hero-copy">
       
-      <h1>Build skills.<br><span>Make an impact.</span></h1>
+      <h1 class="hero-anim-title"><span class="hw" style="--i:0">A</span> <span class="hw" style="--i:1">new</span> <span class="hw" style="--i:2">way</span> <span class="hw" style="--i:3">to</span> <span class="hw" style="--i:4">intern.</span><br><span class="hw hw-accent" style="--i:5">Virtually.</span></h1>
       <p class="vic-hero-description">Turn what you learn into what you can do. Explore expert-validated virtual internships, solve real-world tasks, and complete a capstone project — all at your own pace.</p>
       <div class="vic-hero-actions">
         <a class="vic-btn vic-btn-primary" href="https://virtualinternship.info/saml2/acs-production/login">Login / Sign up <span aria-hidden="true">↗</span></a>
