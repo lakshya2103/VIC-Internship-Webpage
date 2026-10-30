@@ -852,12 +852,41 @@ const vicFilterButtons=[...document.querySelectorAll('.filter-btn')], vicRows=[.
 @media (max-width:520px){#vicbot{right:12px;bottom:12px}#vicbot .vb-panel{width:calc(100vw - 24px);height:min(78vh,620px)}#vicbot .vb-disc{width:64px;height:64px}#vicbot .vb-disc canvas{transform:scale(.92)}}
 @media (prefers-reduced-motion:reduce){#vicbot *,#vicbot *:before,#vicbot *:after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}#vicbot .vb-body{scroll-behavior:auto}}
 @media print{#vicbot{display:none}}
+
+/* ---- glow + motion layer ---- */
+@property --vb-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes vbSpin{to{--vb-angle:360deg}}
+@keyframes vbAurora{0%{transform:translate(-8%,2%) rotate(0) scale(1)}100%{transform:translate(8%,-10%) rotate(28deg) scale(1.25)}}
+@keyframes vbShimmer{to{background-position:0 0}}
+@keyframes vbSheen{to{transform:translateX(130%)}}
+@keyframes vbFlow{50%{background-position:100% 0}}
+#vicbot .vb-aura{position:absolute;right:0;bottom:0;width:min(392px,calc(100vw - 24px));height:min(620px,calc(100vh - 36px));border-radius:28px;background:conic-gradient(from var(--vb-angle),#412BFD,#4285f4,#6FEDEE,#9b72cb,#d96570,#412BFD);filter:blur(24px);opacity:0;transform:scale(.88);transform-origin:bottom right;pointer-events:none;z-index:0;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.3,.64,1)}
+#vicbot.is-open .vb-aura{opacity:.5;transform:scale(1.025);animation:vbSpin 7s linear infinite}
+#vicbot.is-open.is-thinking .vb-aura{opacity:.95;transform:scale(1.07)}
+#vicbot .vb-panel{z-index:1;border:2px solid transparent;background:linear-gradient(#f6f6fb,#f6f6fb) padding-box,conic-gradient(from var(--vb-angle),#412BFD,#4285f4,#6FEDEE,#9b72cb,#d96570,#412BFD) border-box}
+#vicbot.is-open .vb-panel{animation:vbSpin 7s linear infinite}
+#vicbot .vb-head:after{content:none}
+#vicbot .vb-head:before{content:"";position:absolute;inset:-45%;pointer-events:none;background:radial-gradient(circle at 18% 30%,rgba(111,237,238,.55),transparent 38%),radial-gradient(circle at 82% 22%,rgba(217,101,112,.5),transparent 36%),radial-gradient(circle at 58% 92%,rgba(155,114,203,.65),transparent 40%);animation:vbAurora 9s ease-in-out infinite alternate}
+#vicbot .vb-avatar{box-shadow:0 0 0 1.5px rgba(255,255,255,.35),0 0 18px rgba(111,237,238,.55)}
+#vicbot .vb-bot{position:relative;overflow:hidden;transition:box-shadow 1.4s ease}
+#vicbot .vb-bot:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 28%,rgba(111,237,238,.38) 44%,rgba(155,114,203,.32) 56%,transparent 72%);transform:translateX(-130%);animation:vbSheen 1.2s ease .12s 1 both}
+#vicbot .vb-bot.is-new{box-shadow:0 0 0 1.5px rgba(155,114,203,.55),0 0 24px rgba(65,43,253,.28)}
+#vicbot .vb-user{background:linear-gradient(120deg,#412BFD,#6b52ff,#4285f4,#412BFD);background-size:300% 100%;animation:vbIn .45s cubic-bezier(.34,1.4,.64,1) both,vbFlow 6s ease-in-out infinite}
+#vicbot .vb-think{border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--vb-angle),#412BFD,#4285f4,#6FEDEE,#9b72cb,#d96570,#412BFD) border-box;box-shadow:0 0 18px rgba(155,114,203,.35);animation:vbIn .35s ease both,vbSpin 2.4s linear infinite}
+#vicbot .vb-think span{background:linear-gradient(90deg,#8a84a8 0%,#8a84a8 34%,#412BFD 46%,#d96570 54%,#8a84a8 66%,#8a84a8 100%) 100% 0/300% 100% no-repeat;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:vbShimmer 1.7s linear infinite;font-weight:600}
+#vicbot .vb-chip:hover,#vicbot .vb-chip:focus-visible{box-shadow:0 0 0 3px rgba(111,237,238,.4),0 8px 22px rgba(65,43,253,.34)}
+#vicbot .vb-chips-label{background:linear-gradient(90deg,#412BFD,#9b72cb,#d96570,#412BFD) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:vbIn .4s ease both,vbFlow 5s ease-in-out infinite}
+#vicbot .vb-disc{isolation:isolate}
+#vicbot .vb-disc:before{inset:-6px;border:0;z-index:-1;opacity:.8;background:conic-gradient(from var(--vb-angle),#412BFD,#4285f4,#6FEDEE,#9b72cb,#d96570,#412BFD);filter:blur(7px);-webkit-mask:radial-gradient(circle closest-side,transparent 84%,#000 87%);mask:radial-gradient(circle closest-side,transparent 84%,#000 87%);animation:vbSpin 4s linear infinite}
+#vicbot .vb-body>*{flex-shrink:0}
+@media (max-width:520px){#vicbot .vb-aura{width:calc(100vw - 24px);height:min(78vh,620px)}}
 </style>
 <div id="vicbot" aria-live="off">
   <button type="button" class="vb-launch" id="vbLaunch" aria-haspopup="dialog" aria-expanded="false" aria-controls="vbPanel" aria-label="Have questions? Open the FAQ assistant">
     <span class="vb-bubble" id="vbBubble">Have questions?<small>Tap to ask the VIC assistant</small></span>
     <span class="vb-disc"><canvas id="vbOrb" aria-hidden="true"></canvas></span>
   </button>
+  <div class="vb-aura" aria-hidden="true"></div>
   <section class="vb-panel" id="vbPanel" role="dialog" aria-label="VIC FAQ assistant" inert>
     <header class="vb-head">
       <span class="vb-avatar"><canvas id="vbAvatar" aria-hidden="true"></canvas></span>
@@ -930,9 +959,10 @@ var main=Q.filter(function(x){return!x.parent}),asked={},busy=false,thinkOrb=nul
 
 /* ---------- rendering ---------- */
 function el(cls,html,tag){var e=document.createElement(tag||'div');e.className=cls;if(html!=null)e.innerHTML=html;return e}
-function toEnd(){body.scrollTop=body.scrollHeight}
-function addUser(t){var m=el('vb-msg vb-user');m.textContent=t;body.appendChild(m);toEnd()}
-function addBot(blocks){var m=el('vb-msg vb-bot');blocks.forEach(function(b,i){var w=el('vb-block',b);w.style.setProperty('--d',(reduced?0:i*0.12)+'s');m.appendChild(w)});body.appendChild(m);toEnd();
+var anchor=null;
+function toEnd(){var max=body.scrollHeight-body.clientHeight;if(anchor&&anchor.isConnected){var top=anchor.getBoundingClientRect().top-body.getBoundingClientRect().top+body.scrollTop-12;body.scrollTop=Math.max(0,Math.min(max,top))}else body.scrollTop=max}
+function addUser(t){anchor=null;var m=el('vb-msg vb-user');m.textContent=t;body.appendChild(m);toEnd()}
+function addBot(blocks){var m=el('vb-msg vb-bot is-new');setTimeout(function(){m.classList.remove('is-new')},1800);blocks.forEach(function(b,i){var w=el('vb-block',b);w.style.setProperty('--d',(reduced?0:i*0.12)+'s');m.appendChild(w)});body.appendChild(m);anchor=m;toEnd();
   if(!reduced){var n=0,t=setInterval(function(){toEnd();if(++n>12)clearInterval(t)},60)}return m}
 function clearChips(){var c=body.querySelectorAll('.vb-chips');for(var i=0;i<c.length;i++)c[i].remove()}
 function chips(list,label,soft){clearChips();var w=el('vb-chips');if(label)w.appendChild(el('vb-chips-label',label));
@@ -947,16 +977,17 @@ function nextChips(last){
   else if(rest.length)chips(rest,'More questions');
   else chips([{q:'↺ Start over',restart:true}],'You have been through all the questions');
 }
-function think(done){
+function think(done){anchor=null;
   if(reduced){done();return}
+  root.classList.add('is-thinking');
   var t=el('vb-think');var c=document.createElement('canvas');var s=el('',null,'span');s.textContent='Looking through the FAQs…';t.appendChild(c);t.appendChild(s);body.appendChild(t);toEnd();
   thinkOrb=VicOrb.mount(c,'searching',20,P);
   setTimeout(function(){thinkOrb.setState('composing');s.textContent='Putting an answer together…'},650);
-  setTimeout(function(){thinkOrb.destroy();thinkOrb=null;t.remove();done()},1350);
+  setTimeout(function(){thinkOrb.destroy();thinkOrb=null;t.remove();root.classList.remove('is-thinking');done()},1350);
 }
 function ask(id){if(busy)return;var x=byId[id];if(!x)return;busy=true;asked[id]=true;clearChips();addUser(x.q);
   think(function(){addBot(x.a);setTimeout(function(){nextChips(id);busy=false},reduced?0:Math.min(900,350+x.a.length*160))})}
-function start(){busy=false;asked={};if(thinkOrb){thinkOrb.destroy();thinkOrb=null}body.innerHTML='';
+function start(){busy=false;asked={};anchor=null;root.classList.remove('is-thinking');if(thinkOrb){thinkOrb.destroy();thinkOrb=null}body.innerHTML='';
   addBot(['<p>Hello! I’m the VIC assistant. I can answer common questions about the <b>Virtual Internship Capsule</b>.</p><p>Pick a question below to get started.</p>']);
   setTimeout(function(){if(!busy)chips(main,'Popular questions')},reduced?0:450)}
 
