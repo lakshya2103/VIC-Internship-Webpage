@@ -638,6 +638,7 @@ main,section,.app-view,.subpage-main,.content-section{min-width:0}
 <script id="a11y-head">(function(){try{var s=JSON.parse(localStorage.getItem('vic-a11y-v1')||'null');if(!s)return;var r=document.documentElement;if(s.size&&s.size!==100)r.style.fontSize=s.size+'%';if(s.contrast==='dark')r.classList.add('a11y-hc-dark');if(s.contrast==='light')r.classList.add('a11y-hc-light');var f={links:'a11y-links',font:'a11y-font',dys:'a11y-dys',spacing:'a11y-spacing',left:'a11y-left',pause:'a11y-pause',cursor:'a11y-cursor',guide:'a11y-guide-on',noimg:'a11y-noimg',gray:'a11y-gray'};Object.keys(f).forEach(function(k){if(s[k])r.classList.add(f[k])})}catch(e){}})();
 </script>
 <style id="hero-headline-size">.vic-hero-copy h1.hero-anim-title .hw-accent{font-size:1.14em}</style>
+<style id="hero-info-strip">.vic-hero-stats{grid-template-columns:1fr 1fr 1.2fr!important}.vic-hero-info{display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;max-width:560px;margin-top:.7rem;padding:.65rem .9rem;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:rgba(255,255,255,.07);font-size:.76rem;line-height:1.5;color:rgba(255,255,255,.82)}.vic-hero-info b{color:#a8ffff;font-weight:800}.vic-hero-info .proof-separator{display:none}@media(max-width:767px){.vic-hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.vic-hero-info{flex-direction:column;gap:.35rem}.vic-hero-info .proof-separator{display:none}}</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content" id="skipLink">Skip to Main Content</a>
@@ -666,6 +667,7 @@ main,section,.app-view,.subpage-main,.content-section{min-width:0}
       </div>
       <button type="button" class="vh-trigger" id="vhTrigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="vhPanel"><span class="vh-orb"><canvas id="vhTriggerOrb" aria-hidden="true"></canvas></span><span>Need Help With Login or Sign-Up?</span><span class="vh-arrow" aria-hidden="true">→</span></button>
       <div class="vic-hero-proof"><span class="proof-check">✓</span> Expert-validated internships <span class="proof-separator">·</span> Complete at your own pace <span class="proof-separator">·</span> Earn certificates</div>
+      <div class="vic-hero-info"><span><b>Cost:</b> Free for all learners</span><span class="proof-separator" aria-hidden="true">·</span><span><b>Who can join:</b> Undergraduate and postgraduate students in chemistry, engineering and related STEM fields, and early-career professionals, from any country</span></div>
     </div>
     <div class="vic-hero-art" role="img" aria-label="Illustration of a virtual internship dashboard showing task progress, a Capstone Assignment, and a certificate">
       <div class="art-skyline">
@@ -709,7 +711,7 @@ main,section,.app-view,.subpage-main,.content-section{min-width:0}
       <div class="art-ground"></div>
     </div>
     <div class="vic-hero-stats">
-      <div><strong>15,000+</strong><span>Enrollments</span></div><div><strong>350+</strong><span>Internships Completed</span></div><div class="hero-experts-stat"><strong>10+</strong><span>Experts</span></div><div class="stats-note">A more hands-on way<br>to move forward.</div>
+      <div><strong>15,000+</strong><span>Enrollments</span></div><div class="hero-experts-stat"><strong>10+</strong><span>Experts</span></div><div class="stats-note">A more hands-on way<br>to move forward.</div>
     </div>
   </div>
 </section>
@@ -1672,6 +1674,8 @@ var Q=[
 {id:'password',q:'My Password Is Not Being Accepted. What Should I Do?',a:['<p>When creating your password, <b>do not use the “@” symbol</b>. If your password contains “@”, create a new one without it.</p>','<p>You can use “#” as a special character instead.</p>']},
 {id:'after',q:'What Should I Do After Filling Out the Sign Up Form?',a:['<p>After you submit the account creation form, click the <b>ACS Home</b> button and <b>log in</b> to complete the process.</p>','<p>You will see an on-screen message confirming that your account has been created and is pending approval.</p>']},
 {id:'why',q:'Why Can’t I Log In Right After Registering?',a:['<p>The Virtual Internship Capsule is currently in <b>invite-only testing</b>, so every registration needs <b>account review and approval</b>.</p>','<p>Approval is typically completed <b>within 2 hours</b>. Once you are approved, log in to get access.</p>']},
+{id:'free',q:'Is VIC Free?',a:['<p>Yes. VIC is <b>free for all learners</b>.</p>']},
+{id:'who',q:'Who Can Join?',a:['<p>Undergraduate and postgraduate students in chemistry, engineering and related STEM fields, and early-career professionals, from any country.</p>']},
 {id:'approved',q:'My Account Is Approved. What Do I Do Next?',a:['<p>Log in to VIC, browse the available internship pathways, <b>enroll in a VIC internship</b>, and begin your internship.</p>']}
 ];
 var byId={};Q.forEach(function(x){byId[x.id]=x});
